@@ -10,9 +10,9 @@ import pandas as pd
 import pymysql
 from pymilvus import connections, Collection
 from sentence_transformers import SentenceTransformer
-
-model = SentenceTransformer('D:\\bge-large-en-v1.5')
-connections.connect('default', host='localhost', port=19530)
+localhost ='172.19.16.1'
+model = SentenceTransformer('BAAI/bge-large-en-v1.5')
+connections.connect('default', host=f'{localhost}', port=19530)
 collection_name = 'email_embeddings'
 collection = Collection(name=collection_name)
 
@@ -26,7 +26,7 @@ def select1(sender, start_date_str, end_date_str):
     end_date_formatted = end_date.strftime("%Y-%m-%d %H:%M:%S")
     params = (sender, sender, start_date_formatted, end_date_formatted)
     start_time = time1.time()
-    conn = pymysql.connect(host='localhost', user='root', password='18921190757ytk', database='zion')
+    conn = pymysql.connect(host=f'{localhost}', user='root', password='18921190757ytk', database='zion')
     params = (sender, sender, start_date_formatted, end_date_formatted)
     if sender!='':
         with conn.cursor() as cursor:
@@ -98,7 +98,7 @@ def select3(query_content):
     # 索引名称
     index = "email"
     # ZincSearch 主机地址
-    zinc_host = "http://localhost:4080"
+    zinc_host = f'http://{localhost}:4080'
     # 完整的搜索 URL
     zinc_url = zinc_host + "/api/" + index + "/_search"
 
@@ -139,7 +139,7 @@ def select4(sender, start_date_str, end_date_str):
     end_date_formatted = end_date.strftime("%Y-%m-%d %H:%M:%S")
     params = (sender, sender, start_date_formatted, end_date_formatted)
     start_time = time1.time()
-    conn = pymysql.connect(host='localhost', user='root', password='18921190757ytk', database='zion')
+    conn = pymysql.connect(host=f'{localhost}', user='root', password='18921190757ytk', database='zion')
     params = (sender, sender, start_date_formatted, end_date_formatted)
     with conn.cursor() as cursor:
         sql_query = """

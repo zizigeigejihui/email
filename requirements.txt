@@ -1,0 +1,7 @@
+numpy==2.0.1
+pandas==2.2.2
+pymilvus==2.4.4
+PyMySQL==1.1.1
+Requests==2.32.3
+sentence_transformers==3.0.1
+streamlit==1.36.0
